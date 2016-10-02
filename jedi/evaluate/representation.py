@@ -915,8 +915,13 @@ class ModuleWrapper(use_metaclass(CachedMetaClass, tree.Module, Wrapper)):
                         other = os.path.join(s, unicode(self.name))
                         if os.path.isdir(other):
                             paths.add(other)
-                    return list(paths)
+                    with open('/tmp/sbi', 'a') as sbi:
+                        sbi.write("===NS> %s %s %s\n" % (init_path, self._parent_module, paths))
+                    if paths:
+                        return list(paths)
         # Default to this.
+        with open('/tmp/sbi', 'a') as sbi:
+            sbi.write("===NN> %s %s %s\n" % (init_path, self._parent_module, [self._get_init_directory()]))
         return [self._get_init_directory()]
 
     @property
