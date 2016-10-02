@@ -907,7 +907,7 @@ class ModuleWrapper(use_metaclass(CachedMetaClass, tree.Module, Wrapper)):
                 # these are strings that need to be used for namespace packages,
                 # the first one is ``pkgutil``, the second ``pkg_resources``.
                 options = ('declare_namespace(__name__)', 'extend_path(__path__')
-                if options[0] in content or options[1] in content:
+                if options[0] in content or options[1] in content or unicode(self.name) == 'odoo':
                     # It is a namespace, now try to find the rest of the
                     # modules on sys_path or whatever the search_path is.
                     paths = set()
